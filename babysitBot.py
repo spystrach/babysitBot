@@ -13,19 +13,23 @@
 # modules complémentaires
 import os
 import sys
+import sqlite3
 from re import compile as reCompile
+from datetime import datetime as dt
+from locale import setlocale, LC_ALL
+from traceback import format_exc
+from hashlib import md5
+# modules complémentaires externes
 from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Updater, CommandHandler, CallbackQueryHandler
 from telegram.ext import ConversationHandler, MessageHandler, Filters, MessageFilter
-import sqlite3
-from datetime import datetime as dt
-from locale import setlocale, LC_ALL
 from openpyxl import Workbook
-from traceback import format_exc
-from hashlib import md5
+
 
 # les erreurs critiques
 class Exit(Exception):
+    """gestion des erreurs pendant la manipulation de la base de donnée."""
+
     pass
 
 # mise du programme en français pour les affichage de strftime
@@ -87,7 +91,6 @@ class obj_bdd():
     # interaction possible avec un 'with'
     def __enter__(self):
         return self
-
     # interaction possible avec un 'with'
     def __exit__(self, exc_type, exc_val, exc_tb):
         self.save()
