@@ -28,6 +28,8 @@ KEEP_DB = True
 DB_FILENAME = "data.db"
 # se connecte en utilisant l'ip plutot que le nom d'hote
 MODE_IP = False
+NOM_HOTE = "raspberry4"
+REJECT_UNKNOWN = True
 
 ## ~~~~~~~~~~~~~~~~~~~~~~~~~~         FONCTIONS         ~~~~~~~~~~~~~~~~~~~~~~~~~~ ##
 
@@ -102,7 +104,10 @@ if __name__ == "__main__":
     ssh_client = SSHClient()
     # ajout des signatures des serveur ssh connues, rejete si la signature est inconnue
     ssh_client.load_host_keys(os.path.expanduser("~/.ssh/known_hosts"))
-    ssh_client.set_missing_host_key_policy(RejectPolicy())
+    if REJECT_UNKNOWN:
+        ssh_client.set_missing_host_key_policy(RejectPolicy())
+    else:
+        ssh_client.set_missing_host_key_policy(AutoAddPolicy())
 
     # demande du mot de passe du raspberry
     while True:

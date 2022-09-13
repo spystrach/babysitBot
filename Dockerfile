@@ -25,4 +25,4 @@ COPY .env ./
 COPY babysitBot.py ./
 
 # entrypoint
-CMD [ "python", "./babysitBot.py" ]
+ENTRYPOINT [ "python", "babysitBot.py" ]
