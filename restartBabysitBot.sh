@@ -17,7 +17,7 @@ docker image rm babysit_bot
 docker build -t babysit_bot .
 
 # lance le nouveau conteneur
-docker run -d --name --restart=unless-stopped babysit_bot_1 babysit_bot
+docker run -d --restart=unless-stopped --name babysit_bot_1 babysit_bot
 
 # fin
 cd || exit
